@@ -1,0 +1,206 @@
+/* Matichico, el guía del sitio. Solo informa: no recomienda ni promociona productos. */
+.mg-mascota, .mg-panel, .mg-burbuja, .mg-llamar { position: fixed; z-index: 900; font-family: 'Segoe UI', system-ui, sans-serif; }
+.mg-mascota, .mg-panel, .mg-burbuja, .mg-llamar { --mg-base: 14px; }
+body:has(#tBarra:not([hidden])) .mg-mascota,
+body:has(#tBarra:not([hidden])) .mg-panel,
+body:has(#tBarra:not([hidden])) .mg-burbuja,
+body:has(#tBarra:not([hidden])) .mg-llamar { --mg-base: 84px; }
+body:has(dialog[open]) .mg-mascota, body:has(dialog[open]) .mg-panel, body:has(dialog[open]) .mg-burbuja, body:has(dialog[open]) .mg-llamar { display: none; }
+
+.mg-mascota {
+  left: 8px; bottom: var(--mg-base);
+  width: auto; height: 150px; padding: 0; border: 0; background: transparent; cursor: pointer;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.35));
+  transform-origin: 50% 100%;
+  transition: left 0.7s cubic-bezier(.3,1.4,.5,1), top 0.7s cubic-bezier(.3,1.4,.5,1), bottom 0.7s cubic-bezier(.3,1.4,.5,1);
+}
+.mg-mascota img { display: block; height: 100%; width: auto; max-width: none; pointer-events: none; }
+.mg-mascota:focus-visible { outline: 3px solid #D4216C; outline-offset: 4px; border-radius: 12px; }
+.mg-mascota[hidden], .mg-panel[hidden], .mg-burbuja[hidden] { display: none; }
+
+/* Llega saltando y, de vez en cuando, da un saltito */
+.mg-entrando { animation: mg-llegada 1.1s cubic-bezier(.3,1.3,.5,1) both; }
+.mg-salto { animation: mg-salto 0.7s cubic-bezier(.3,1.5,.6,1); }
+.mg-quieto { animation: mg-respira 3.4s ease-in-out infinite; }
+@keyframes mg-llegada { 0% { transform: translateX(-130%) rotate(-12deg); } 55% { transform: translateX(8%) translateY(-34px) rotate(6deg); } 75% { transform: translateY(0) scale(1.05, 0.9); } 100% { transform: none; } }
+@keyframes mg-salto { 0% { transform: none; } 35% { transform: translateY(-46px) rotate(-6deg) scale(0.96, 1.06); } 70% { transform: translateY(0) scale(1.06, 0.92); } 100% { transform: none; } }
+@keyframes mg-respira { 0%, 100% { transform: none; } 50% { transform: translateY(-4px) scale(1.01, 0.995); } }
+
+.mg-burbuja {
+  left: 66px; bottom: calc(var(--mg-base) + 96px); max-width: min(240px, calc(100vw - 86px));
+  background: #fff; color: #4b2e2e; border: 2px solid #FFC800; border-radius: 16px 16px 16px 4px;
+  padding: 10px 12px; font-size: 0.95rem; line-height: 1.35; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+.mg-burbuja button { margin-top: 8px; }
+
+.mg-panel {
+  left: 8px; bottom: calc(var(--mg-base) + 160px);
+  width: min(340px, calc(100vw - 16px)); max-height: min(62vh, 480px);
+  display: flex; flex-direction: column; overflow: hidden;
+  background: #fffaf3; color: #4b2e2e; border: 2px solid #FFC800; border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.mg-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; background: #4b2e2e; color: #FFC800; font-weight: 800; }
+.mg-cab button { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.mg-mensajes { flex: 1 1 auto; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; min-height: 120px; }
+.mg-msg { max-width: 92%; padding: 8px 11px; border-radius: 14px; font-size: 0.95rem; line-height: 1.4; overflow-wrap: anywhere; }
+.mg-msg--bot { align-self: flex-start; background: #fff; border: 1px solid #f0e0c8; border-bottom-left-radius: 4px; }
+.mg-msg--yo { align-self: flex-end; background: #FFC800; color: #3b2414; border-bottom-right-radius: 4px; }
+.mg-msg a { color: #a01a58; font-weight: 700; }
+.mg-sugeridas { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 10px; }
+.mg-pie { display: flex; gap: 6px; padding: 8px 10px; border-top: 1px solid #f0e0c8; background: #fff; }
+.mg-pie input { flex: 1 1 auto; min-width: 0; font: inherit; padding: 9px 10px; border: 2px solid #d9c4a8; border-radius: 10px; }
+.mg-btn, .mg-panel button, .mg-burbuja button {
+  font: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer; border-radius: 999px; border: 2px solid #4b2e2e;
+  background: #fff3e6; color: #4b2e2e; padding: 7px 12px; min-height: 36px;
+}
+.mg-panel button:hover, .mg-panel button:focus, .mg-burbuja button:hover, .mg-burbuja button:focus { background: #ffe7cc; color: #4b2e2e; transform: none; }
+.mg-panel button:focus-visible, .mg-burbuja button:focus-visible, .mg-pie input:focus-visible { outline: 3px solid #D4216C; outline-offset: 2px; }
+.mg-panel .mg-primario, .mg-burbuja .mg-primario { background: #157a37; border-color: #157a37; color: #fff; }
+.mg-panel .mg-primario:hover, .mg-panel .mg-primario:focus, .mg-burbuja .mg-primario:hover { background: #0f6029; color: #fff; }
+.mg-panel .mg-cab button { border-color: transparent; }
+.mg-panel .mg-cab button:hover, .mg-panel .mg-cab button:focus { background: rgba(255, 255, 255, 0.3); color: #fff; }
+
+/* Lo que está explicando en el recorrido */
+.mg-destacado { outline: 4px solid #FFC800 !important; outline-offset: 6px; border-radius: 14px; box-shadow: 0 0 0 9px rgba(212, 33, 108, 0.35) !important; transition: box-shadow 0.3s; }
+
+@media (min-width: 900px) {
+  .mg-mascota { height: 220px; }
+  .mg-burbuja { left: 96px; bottom: calc(var(--mg-base) + 140px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mg-mascota { transition: none; }
+  .mg-entrando, .mg-salto, .mg-quieto { animation: none; }
+  .mg-destacado { transition: none; }
+}
+@media print { .mg-mascota, .mg-panel, .mg-burbuja { display: none; } }
+
+/* Los estilos globales de "button" (styles.css) no deben recolorear ni agrandar a Matichico */
+.mg-mascota, .mg-mascota:hover, .mg-mascota:focus { background: transparent; box-shadow: none; padding: 0; border: 0; }
+.mg-panel { padding: 0; margin: 0; max-width: none; }
+.mg-cab button { white-space: nowrap; }
+.mg-panel button:active, .mg-burbuja button:active { transform: none; }
+.mg-mensajes { min-height: 80px; }
+.mg-sugeridas { flex: 0 0 auto; max-height: 112px; overflow-y: auto; }
+.mg-sugeridas button { padding: 5px 10px; min-height: 32px; font-size: 0.85rem; }
+.mg-pie { flex: 0 0 auto; }
+.mg-panel { max-height: min(70vh, 520px); }
+
+/* El chat siempre cabe completo en la pantalla (celulares bajos, barra del navegador que sube y baja, giro horizontal) */
+.mg-panel, .mg-burbuja { box-sizing: border-box; }
+.mg-panel {
+  max-width: calc(100vw - 16px);
+  max-height: min(70vh, 520px);
+  max-height: min(70dvh, 520px, calc(100dvh - var(--mg-base) - 160px - 12px));
+}
+.mg-burbuja { max-width: min(240px, calc(100vw - 86px)); }
+@media (max-height: 560px) {
+  /* pantalla muy baja: el chat usa todo el alto disponible y tapa a la guía mientras está abierto */
+  .mg-panel { bottom: 8px; max-height: calc(100vh - 16px); max-height: calc(100dvh - 16px); }
+  body:has(#tBarra:not([hidden])) .mg-panel { bottom: 8px; }
+}
+.mg-mensajes { flex: 1 1 0; min-height: 56px; }
+.mg-sugeridas { flex: 0 1 auto; min-height: 0; }
+.mg-cab, .mg-pie { flex-shrink: 0; }
+@media (max-height: 560px) { .mg-sugeridas { max-height: 56px; } .mg-cab { padding: 6px 10px; } .mg-pie { padding: 6px 8px; } }
+/* Celular: los botones sugeridos van en una sola fila deslizable (más espacio para leer) y el botón de WhatsApp no tapa el chat */
+@media (max-width: 600px) {
+  /* Guía y saludo más chicos: a 150px de alto tapaban productos y textos */
+  .mg-mascota { height: 100px; }
+  .mg-burbuja { left: 58px; bottom: calc(var(--mg-base) + 70px); max-width: min(200px, calc(100vw - 76px)); padding: 8px 10px; font-size: 0.85rem; }
+  .mg-burbuja button { min-height: 34px; padding: 5px 10px; font-size: 0.82rem; }
+  .mg-panel { bottom: calc(var(--mg-base) + 108px); max-height: min(70vh, 520px); max-height: min(70dvh, 520px, calc(100dvh - var(--mg-base) - 108px - 12px)); }
+  .mg-sugeridas { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; max-height: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .mg-sugeridas button { flex: 0 0 auto; white-space: nowrap; }
+  body:has(.mg-panel:not([hidden])) .whatsapp-float { display: none; }
+}
+
+/* Botón para volver a llamar al guía (solo la carita, redondo) */
+.mg-llamar {
+  left: 10px; bottom: var(--mg-base); width: 58px; height: 58px; padding: 0; overflow: hidden;
+  border: 3px solid #FFC800; border-radius: 50%; background: #fff3e6; cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+.mg-llamar img { display: block; width: 100%; height: auto; max-width: none; margin-top: -2px; pointer-events: none; }
+.mg-llamar:hover, .mg-llamar:focus { background: #ffe7cc; transform: none; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35); }
+.mg-llamar:focus-visible { outline: 3px solid #D4216C; outline-offset: 3px; }
+.mg-llamar { animation: mg-llegada 0.9s cubic-bezier(.3,1.3,.5,1) both; }
+@media (prefers-reduced-motion: reduce) { .mg-llamar { animation: none; } }
+@media print { .mg-llamar { display: none; } }
+
+/* Computador: el chat se abre AL LADO de la guía (nunca encima), para que se vea el personaje completo */
+@media (min-width: 900px) {
+  .mg-panel {
+    left: 124px; bottom: var(--mg-base);
+    max-height: min(560px, calc(100vh - var(--mg-base) - 104px));
+    max-height: min(560px, calc(100dvh - var(--mg-base) - 104px));
+  }
+  body:has(#tBarra:not([hidden])) .mg-panel { bottom: var(--mg-base); }
+}
+
+/* Accesibilidad: enlace de salto, barra de ayudas y letra grande */
+.mg-saltar {
+  position: fixed; left: 8px; top: -120px; z-index: 2000; padding: 12px 16px; border-radius: 12px;
+  background: #FFC800; color: #3b2414; font-weight: 800; text-decoration: underline; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+.mg-saltar:focus, .mg-saltar:focus-visible { top: 8px; outline: 3px solid #D4216C; outline-offset: 2px; }
+.mg-acc { display: flex; gap: 6px; padding: 8px 10px; overflow-x: auto; flex-shrink: 0; background: #fff3e6; border-bottom: 1px solid #f0e0c8; scrollbar-width: thin; }
+.mg-acc button { flex: 0 0 auto; white-space: nowrap; font-size: 0.82rem; min-height: 40px; }
+.mg-acc button[aria-pressed="true"] { background: #157a37; border-color: #157a37; color: #fff; }
+.mg-panel .mg-acc button[aria-pressed="true"]:hover, .mg-panel .mg-acc button[aria-pressed="true"]:focus { background: #0f6029; color: #fff; }
+.mg-panel.mg-grande .mg-msg { font-size: 1.2rem; line-height: 1.5; }
+.mg-panel.mg-grande button, .mg-panel.mg-grande .mg-pie input { font-size: 1.05rem; min-height: 46px; }
+@media (max-height: 560px) { .mg-acc { padding: 4px 8px; } .mg-acc button { min-height: 34px; } }
+@media print { .mg-saltar { display: none; } }
+.mg-cab { gap: 6px; padding: 8px 10px; }
+.mg-cab > span { font-size: 0.92rem; flex: 1 1 auto; min-width: 0; }
+.mg-cab button { font-size: 0.8rem; padding: 5px 10px; min-height: 36px; white-space: nowrap; }
+
+/* ---------- Chat más cómodo (nov-2026) ----------
+   Cabecera con carita, "Ayudas" (voz y letra grande, plegadas) y ✕ para cerrar; la despedida va abajo, discreta.
+   En el celular el chat se abre como panel grande desde abajo (con fondo oscuro) y la respuesta tiene espacio para leerse. */
+.mg-cab { align-items: center; }
+.mg-cara { width: 34px; height: 34px; flex: 0 0 auto; border-radius: 50%; object-fit: cover; object-position: 50% 8%; background: #fff3e6; border: 2px solid #FFC800; }
+.mg-panel .mg-cab .mg-cerrar { width: 38px; min-width: 38px; padding: 0; font-size: 1.1rem; line-height: 1; }
+.mg-acc[hidden] { display: none; }
+.mg-panel:focus { outline: none; }
+.mg-panel .mg-despedir {
+  flex: 0 0 auto; align-self: center; margin: 0 0 6px; padding: 4px 8px; min-height: 32px;
+  border: 0; border-radius: 8px; background: transparent; color: #6b4a3a; font-weight: 600; font-size: 0.8rem; text-decoration: underline;
+}
+.mg-panel .mg-despedir:hover, .mg-panel .mg-despedir:focus { background: #fff3e6; color: #4b2e2e; }
+.mg-fondo { position: fixed; inset: 0; z-index: 899; background: rgba(40, 20, 20, 0.45); display: none; }
+.mg-burbuja button + button { margin-left: 4px; }
+@media (min-width: 601px) { .mg-mensajes { min-height: 140px; } }
+/* Computador: chat un poco más ancho (cabe la cabecera) y de alto fijo, para que la respuesta tenga espacio */
+@media (min-width: 900px) {
+  .mg-panel { width: 390px; height: min(560px, calc(100vh - var(--mg-base) - 104px)); height: min(560px, calc(100dvh - var(--mg-base) - 104px)); }
+  .mg-panel.mg-en-recorrido { height: auto; }
+  .mg-panel.mg-en-recorrido .mg-mensajes { flex: 0 1 auto; }
+}
+
+@media (max-width: 600px) {
+  .mg-fondo:not([hidden]) { display: block; }
+  body.mg-abierto .mg-mascota { display: none; }
+  .mg-panel, body:has(#tBarra:not([hidden])) .mg-panel {
+    left: 0; right: 0; bottom: 0; width: 100%; max-width: none;
+    height: min(82vh, 640px); height: min(82dvh, 640px); max-height: none;
+    border-width: 2px 0 0; border-radius: 20px 20px 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .mg-mensajes { flex: 1 1 0; min-height: 0; }
+  .mg-msg { font-size: 1rem; }
+  /* Temas en dos columnas, todos a la vista (antes: una fila deslizable que escondía la mitad) */
+  .mg-sugeridas { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; overflow: visible; max-height: none; padding: 8px 12px; border-top: 1px solid #f0e0c8; }
+  .mg-sugeridas button { white-space: normal; min-height: 42px; font-size: 0.88rem; line-height: 1.2; }
+  .mg-sugeridas .mg-primario { grid-column: 1 / -1; }
+  /* Durante "Guíame por esta página" el chat se achica para que se vea lo que explica */
+  .mg-panel.mg-en-recorrido { height: auto; max-height: 40vh; max-height: 40dvh; }
+  .mg-panel.mg-en-recorrido .mg-mensajes { flex: 0 1 auto; min-height: 0; } /* el panel toma el alto del paso, sin colapsar */
+  .mg-panel.mg-en-recorrido .mg-pie, .mg-panel.mg-en-recorrido .mg-despedir, .mg-panel.mg-en-recorrido .mg-acc { display: none; }
+}
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .mg-panel:not([hidden]) { animation: mg-sube 0.25s ease-out; }
+  @keyframes mg-sube { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+@media print { .mg-fondo { display: none; } }

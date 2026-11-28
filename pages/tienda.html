@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://i.imgur.com https://*.goatcounter.com data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://lfgfmequzmlajlvkjxlv.supabase.co; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://wa.me;">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>Tienda de chocolates artesanales | Matichoc La Ligua</title>
+  <meta name="description" content="Alfajores, cuchuflí, Matidubai, barras y más chocolates artesanales de La Ligua. Arma tu pedido y envíalo por WhatsApp.">
+  <link rel="canonical" href="https://matichoc.cl/pages/tienda.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Matichoc">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:title" content="Tienda de chocolates artesanales | Matichoc La Ligua">
+  <meta property="og:description" content="Alfajores, cuchuflí, Matidubai, barras y más chocolates artesanales de La Ligua. Arma tu pedido y envíalo por WhatsApp.">
+  <meta property="og:url" content="https://matichoc.cl/pages/tienda.html">
+  <meta property="og:image" content="https://matichoc.cl/assets/brand/og-matichoc.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Matichoc, pasión por el cacao">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/x-icon" href="../assets/brand/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="../assets/brand/icon-512.png">
+  <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/chocolate-wow.css" />
+    <link rel="stylesheet" href="../css/matichico-guia.css" />
+  <link rel="stylesheet" href="../css/tienda.css" />
+</head>
+<body>
+<header id="header"><nav class="seo-fallback" aria-label="Menú principal"><a href="../index.html">Inicio</a><a href="../pages/tienda.html">Tienda</a><a href="../pages/la_maestra.html">La Maestra</a><a href="../pages/historia.html">Historia</a><a href="../pages/opiniones.html">Opiniones</a><a href="../pages/contacto.html">Contacto</a><a href="../matijuego/">Matijuego</a></nav></header>
+<div id="page-banner"><h1 class="seo-fallback">Nuestra tienda</h1></div>
+
+<main class="t-main">
+  <p class="t-intro-linea"><strong>Elige</strong>, <strong>revisa</strong> y <strong>envía tu pedido por WhatsApp</strong>. Coordinamos pago y entrega.</p>
+
+  <!-- Aviso compacto para que los productos se vean sin bajar. Las advertencias (frutos secos, alérgenos, altos en) quedan
+       SIEMPRE a la vista en el resumen; al tocarlo se abre el detalle y las entregas. -->
+  <details class="t-aviso" aria-label="Información importante antes de pedir">
+    <summary><strong>Antes de pedir:</strong> <strong>contienen frutos secos</strong> y pueden tener trazas de gluten, leche, huevo o soya. Gran parte son <strong>altos en azúcares</strong> y <strong>altos en grasas</strong>. <span class="t-aviso-mas">Ver detalle y entregas</span></summary>
+    <p>Nuestros productos <strong>contienen frutos secos</strong>. Gran parte son <strong>altos en azúcares</strong> (excepto los especiales sin azúcar) y <strong>altos en grasas</strong>, como todo chocolate. Pueden contener trazas de gluten, leche, huevo o soya. Si tienes alguna alergia, <a href="https://wa.me/56975645591" target="_blank" rel="noopener noreferrer">escríbenos antes de comprar</a>.</p>
+    <p><strong>Entregas:</strong> martes y jueves en nuestro stand de la plaza de La Ligua, otro día a coordinar, o envío por pagar (a regiones por Blue Express). Más detalles en los <a href="terminos.html">Términos y condiciones</a>.</p>
+  </details>
+
+  <div class="t-barra">
+    <label for="tBuscar" class="t-oculto">Buscar productos</label>
+    <input type="search" id="tBuscar" class="t-buscar" placeholder="🔍 Busca alfajor, cuchuflí, dubai…" autocomplete="off">
+    <div class="t-chips" id="tChips" role="group" aria-label="Filtrar por categoría"></div>
+  </div>
+
+  <div id="tCatalogo"></div>
+  <p class="t-vacio" id="tVacio" hidden>No encontramos ese producto. <a id="tVacioLink" href="https://wa.me/56975645591" target="_blank" rel="noopener noreferrer">Pregúntanos por WhatsApp</a>, quizás lo hacemos a pedido.</p>
+</main>
+
+<button type="button" class="t-barra-carrito" id="tBarra" hidden aria-haspopup="dialog">
+  <span class="t-barra-info" aria-live="polite">🛒 <strong id="tBarraCant">0</strong> <span id="tBarraEtq">productos</span> · <strong>$<span id="tBarraTotal">0</span></strong></span>
+  <span class="t-barra-ver">Ver pedido →</span>
+</button>
+
+<dialog class="t-dialog" id="tDialog" aria-labelledby="tDialogTitulo">
+  <form class="t-form" id="tForm" novalidate>
+    <div class="t-dialog-cab">
+      <h2 id="tDialogTitulo">🛒 Tu pedido</h2>
+      <button type="button" class="t-cerrar" id="tCerrar" aria-label="Cerrar el pedido">✕</button>
+    </div>
+    <div class="t-dialog-cuerpo">
+      <p class="t-vacio-carrito" id="tCarritoVacio">Tu pedido está vacío. Cierra esta ventana y agrega algo rico 🍫</p>
+      <ul class="t-items" id="tItems"></ul>
+
+      <div class="t-resumen" id="tResumen">
+        <div><span>Subtotal</span><span>$<span id="tSubtotal">0</span></span></div>
+        <div><span>Envío</span><span>A calcular</span></div>
+        <div class="t-total"><span>Total</span><span>$<span id="tTotal">0</span></span></div>
+      </div>
+
+      <h3>Tus datos</h3>
+      <label class="t-label" for="nombre">Nombre completo*</label>
+      <input class="t-input" type="text" id="nombre" name="nombre" required autocomplete="name" maxlength="60">
+      <label class="t-label" for="contacto">Celular / WhatsApp*</label>
+      <input class="t-input" type="tel" id="contacto" name="contacto" required autocomplete="tel" inputmode="tel" maxlength="20">
+      <div class="t-trampa" aria-hidden="true"><label for="sitioWeb">Deja este campo vacío</label><input type="text" id="sitioWeb" name="sitioWeb" tabindex="-1" autocomplete="off"></div>
+      <p class="t-ayuda">Usamos tu nombre y celular solo para atender este pedido: te escribimos por WhatsApp para coordinar el pago y la entrega, y para avisarte si algo quedó pendiente. Más en la <a href="privacidad.html">Política de privacidad</a>.</p>
+
+      <!-- Entrega, pago y detalles son opcionales y van SOLO en el mensaje de WhatsApp (el sitio no los guarda):
+           sirven para que el primer mensaje llegue completo y no haya que preguntar de vuelta. -->
+      <fieldset class="t-opciones">
+        <legend>¿Cómo lo recibes? <span class="t-opcional">(opcional)</span></legend>
+        <div class="t-opciones-fila">
+          <label class="t-opcion"><input type="radio" name="entrega" value="plaza"><span><strong>Plaza</strong><small>martes o jueves</small></span></label>
+          <label class="t-opcion"><input type="radio" name="entrega" value="otro"><span><strong>Otro día</strong><small>a coordinar</small></span></label>
+          <label class="t-opcion"><input type="radio" name="entrega" value="envio"><span><strong>Envío</strong><small>por pagar</small></span></label>
+        </div>
+        <p class="t-ayuda" id="tEntregaAyuda" aria-live="polite">Si no eliges, lo coordinamos por WhatsApp.</p>
+      </fieldset>
+
+      <fieldset class="t-opciones">
+        <legend>¿Cómo prefieres pagar? <span class="t-opcional">(opcional)</span></legend>
+        <div class="t-opciones-fila">
+          <label class="t-opcion"><input type="radio" name="pago" value="efectivo"><span><strong>Efectivo</strong><small>lo coordinamos</small></span></label>
+          <label class="t-opcion"><input type="radio" name="pago" value="transferencia"><span><strong>Transferencia</strong><small>te damos los datos</small></span></label>
+          <label class="t-opcion"><input type="radio" name="pago" value="tarjeta"><span><strong>Tarjeta</strong><small>online con Tuu</small></span></label>
+        </div>
+        <p class="t-ayuda" id="tPagoAyuda" aria-live="polite">Si no eliges, lo coordinamos por WhatsApp.</p>
+      </fieldset>
+
+      <label class="t-label" for="detalles">Sabores o detalles <span class="t-opcional">(opcional)</span></label>
+      <textarea class="t-input t-detalles" id="detalles" name="detalles" rows="2" maxlength="300" placeholder="Ej.: alfajores de frambuesa y de menta. Es para un regalo."></textarea>
+      <p class="t-ayuda">Va escrito en tu mensaje de WhatsApp; el sitio no lo guarda.</p>
+
+      <p id="pedidos-widget" class="pedidos-widget"></p>
+      <p class="t-ayuda">Te respondemos por WhatsApp para confirmar tu pedido y coordinar el pago y la entrega: el pedido queda confirmado cuando te respondemos. Al enviarlo aceptas los <a href="terminos.html">Términos y condiciones</a>.</p>
+
+      <!-- Pago con tarjeta: aparece solo al elegir "Tarjeta". El proceso de Tuu es el mismo de siempre (enlace fijo + monto copiado). -->
+      <div class="t-pago-tarjeta" id="tPagoTarjeta" hidden>
+        <h3>Pagar con tarjeta</h3>
+        <p class="t-ayuda">Primero envía tu pedido con el botón verde de abajo. Después puedes pagar aquí.</p>
+        <button type="button" class="t-btn t-btn--tuu" id="btnPagarTuu">💳 Pagar online con Tuu</button>
+        <p class="t-tuu-aviso" id="pagoTuuAviso" aria-live="polite">🔒 Pago seguro — se abre en una pestaña nueva. Ahí tendrás que escribir tú el monto total de tu carrito; te lo dejamos copiado para que solo lo pegues.</p>
+        <div class="t-yapague" id="yaPague" hidden>
+          <p>¿Ya pagaste en Tuu? Para confirmar tu pago necesitamos tu <strong>comprobante</strong> (captura o foto). Toca el botón: se abre WhatsApp con el mensaje listo y ahí lo adjuntas. <strong>Tu pedido se confirma cuando recibimos y verificamos tu comprobante.</strong></p>
+          <button type="button" class="t-btn t-btn--suave" id="btnYaPague">✅ Ya pagué: enviar comprobante por WhatsApp</button>
+          <p class="t-tuu-aviso" id="yaPagueAviso" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+    <!-- Pie fijo: el botón principal queda siempre a la vista, sin tener que bajar por el formulario. -->
+    <div class="t-dialog-pie" id="tPie">
+      <p class="t-enviado" id="tEnviado" role="status" hidden>✅ Abrimos WhatsApp con tu pedido listo: <strong>toca enviar ahí</strong> y te respondemos. ¿No se abrió? <a id="tEnviadoLink" href="https://wa.me/56975645591" target="_blank" rel="noopener noreferrer">Ábrelo aquí</a>.</p>
+      <button type="submit" class="t-btn t-btn--enviar">📲 Enviar pedido por WhatsApp</button>
+    </div>
+  </form>
+</dialog>
+
+<footer id="footer"><nav class="seo-fallback" aria-label="Información legal"><a href="../pages/terminos.html">Términos y condiciones</a><a href="../pages/privacidad.html">Política de Privacidad</a><a href="../pages/bases-matilover.html">Bases del programa Matilover</a></nav></footer>
+
+<a href="https://wa.me/56975645591" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.26.86 5.82 2.42a8.2 8.2 0 0 1 2.41 5.82c0 4.53-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.53 3.7-8.23 8.24-8.23m-4.65 4.29c-.15 0-.4.06-.61.3s-.8.78-.8 1.9.82 2.2.94 2.36c.11.15 1.6 2.5 3.95 3.4 1.95.75 2.35.6 2.77.56.42-.04 1.36-.55 1.55-1.09.19-.53.19-.98.13-1.08-.06-.1-.22-.16-.46-.28-.24-.12-1.4-.69-1.62-.77-.22-.08-.37-.12-.53.12-.15.24-.6.77-.74.92-.14.15-.27.17-.51.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.53-1.29-.74-1.76-.19-.46-.39-.4-.53-.4z"/></svg>
+</a>
+
+<script src="../js/base.js"></script>
+
+<script src="../js/analitica.js"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/cuenta.js"></script>
+    <script src="../js/temporadas.js"></script>
+    <script src="../js/brillos.js"></script>
+    <script src="../js/matichico-guia.js"></script>
+<script src="../js/catalogo.js"></script>
+<script src="../js/racha.js"></script>
+<script src="../js/tienda.js"></script>
+<script src="../js/page-tienda.js"></script>
+</body>
+</html>

@@ -1,0 +1,677 @@
+/* Tienda Matichoc: catálogo + carrito en un solo lugar.
+   Todo va bajo .t-* para no chocar con las reglas heredadas de styles.css. */
+
+.t-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 110px;
+  color: #4b2e2e;
+}
+
+/* ---------- Introducción ---------- */
+.t-intro { text-align: center; max-width: 680px; margin: 0 auto 8px; }
+.t-kicker {
+  display: inline-block;
+  background: #d4216c;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin: 0 0 10px;
+}
+.t-intro p { font-size: 1.05rem; margin: 0; }
+.t-pasos {
+  list-style: none;
+  padding: 0;
+  margin: 18px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  counter-reset: paso;
+}
+.t-pasos li {
+  counter-increment: paso;
+  background: #fff;
+  border: 2px solid #ffc800;
+  border-radius: 14px;
+  padding: 10px 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.t-pasos li::before {
+  content: counter(paso);
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: 0 auto 6px;
+  border-radius: 50%;
+  background: #4b2e2e;
+  color: #ffc800;
+  font-weight: 800;
+}
+
+/* ---------- Barra de filtros ---------- */
+.t-barra {
+  position: sticky;
+  top: var(--header-h, 84px);
+  z-index: 20;
+  margin: 16px -16px 8px;
+  padding: 10px 16px;
+  background: rgba(255, 248, 240, 0.96);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid #ead9c4;
+}
+.t-buscar {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  border: 2px solid #4b2e2e;
+  border-radius: 12px;
+  background: #fff;
+  color: #4b2e2e;
+  font: inherit;
+  font-size: 1rem;
+}
+.t-buscar:focus-visible { outline: 3px solid #d4216c; outline-offset: 2px; }
+.t-chips {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding: 2px 2px 4px;
+  scrollbar-width: none;
+}
+.t-chips::-webkit-scrollbar { display: none; }
+.t-chip {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 2px solid #4b2e2e;
+  background: #fff;
+  color: #4b2e2e;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.t-chip[aria-pressed="true"] { background: #4b2e2e; color: #ffc800; }
+.t-chip:focus-visible { outline: 3px solid #d4216c; outline-offset: 2px; }
+
+/* ---------- Catálogo ---------- */
+.t-cat { margin-top: 26px; scroll-margin-top: 130px; /* + el scroll-padding del encabezado fijo (html) */ }
+.t-cat-cab {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.t-cat-cab h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.35rem;
+  margin: 0;
+  color: #4b2e2e;
+}
+.t-cat-cab a { color: #a01a58; font-weight: 700; font-size: 0.9rem; }
+.t-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 18px;
+}
+.t-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(75, 46, 46, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.t-card:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(75, 46, 46, 0.18); }
+.t-card img {
+  display: block;
+  width: 100%;
+  /* Sin height:auto el atributo height="400" le gana a aspect-ratio y en el
+     celular la foto quedaba de 400px de alto en una columna de ~145px. */
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #ead9c4;
+}
+.t-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ffc800;
+  color: #4b2e2e;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.t-card-cuerpo { display: flex; flex-direction: column; gap: 6px; flex: 1; padding: 14px 14px 16px; }
+.t-card h3 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin: 0;
+  color: #4b2e2e;
+}
+.t-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #5a3a2a;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.t-desc.abierto { display: block; -webkit-line-clamp: unset; }
+.t-mas {
+  align-self: flex-start;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  min-height: 32px;
+  color: #a01a58;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.t-mas[hidden] { display: none; }
+.t-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.t-precio { font-size: 1.35rem; font-weight: 800; color: #4b2e2e; }
+
+.t-add {
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #d4216c;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.t-add:hover { background: #b01859; }
+.t-step {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #157a37;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.t-step[hidden], .t-add[hidden] { display: none; }
+.t-step button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: #157a37;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+.t-step output { min-width: 34px; text-align: center; font-weight: 800; color: #157a37; }
+.t-add:focus-visible, .t-step button:focus-visible, .t-mas:focus-visible { outline: 3px solid #4b2e2e; outline-offset: 2px; }
+
+/* Producto de temporada (sin precio fijo) */
+.t-card--consulta { background: linear-gradient(135deg, #fff0f6, #fff); border: 2px dashed #d4216c; }
+.t-card--consulta .t-card-cuerpo { padding: 20px 18px; }
+.t-card--consulta .t-emoji { font-size: 2.4rem; line-height: 1; }
+
+/* Botón de consulta en una tarjeta normal (productos solo a pedido, A_PEDIDO). */
+.t-wsp--chico { width: 100%; box-sizing: border-box; margin-top: 8px; padding: 8px 10px; font-size: 0.9rem; }
+
+/* Galería de personalizados (js/catalogo.js → PERSONALIZADOS): fila deslizable, fotos sin recortar. */
+.t-galeria { margin-top: 22px; }
+.t-galeria h3 { margin: 0 0 4px; color: #4b2e2e; font-size: 1.25rem; }
+.t-galeria p { margin: 0 0 12px; color: #6b4a3a; }
+.t-galeria-fila {
+  list-style: none;
+  margin: 0;
+  padding: 4px 2px 12px;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.t-galeria-fila li { flex: 0 0 auto; scroll-snap-align: start; }
+.t-galeria-fila a {
+  display: block;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid #ffc800;
+  background: #ead9c4;
+  box-shadow: 0 6px 16px rgba(75, 46, 46, 0.12);
+}
+.t-galeria-fila img { display: block; height: 280px; width: auto; max-width: none; }
+.t-galeria-fila span {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  background: rgba(75, 46, 46, 0.9);
+  color: #ffc800;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.t-galeria-fila a:focus-visible { outline: 3px solid #d4216c; outline-offset: 2px; }
+@media (max-width: 720px) {
+  .t-galeria-fila img { height: 220px; }
+}
+.t-wsp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: #157a37;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+.t-vacio { text-align: center; margin: 40px 0; font-size: 1.05rem; }
+.t-vacio[hidden] { display: none; }
+
+/* ---------- Barra del carrito ---------- */
+.t-barra-carrito {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 999;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: calc(100% - 24px);
+  box-sizing: border-box;
+  padding: 10px 10px 10px 18px;
+  background: #4b2e2e;
+  color: #fff8f0;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.t-barra-carrito[hidden] { display: none; }
+.t-barra-info { font-size: 0.98rem; }
+.t-barra-info strong { color: #ffc800; }
+.t-barra-ver {
+  flex: 0 0 auto;
+  background: #d4216c;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.t-barra-carrito:focus-visible { outline: 3px solid #ffc800; outline-offset: 3px; }
+body.t-con-barra .whatsapp-float { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+@media (prefers-reduced-motion: no-preference) {
+  .t-barra-carrito { animation: t-sube 0.25s ease-out; }
+  .t-barra-carrito.bump .t-barra-info { animation: t-bump 0.3s ease; }
+  @keyframes t-sube { from { transform: translateY(130%); } to { transform: none; } }
+  @keyframes t-bump { 50% { transform: scale(1.06); } }
+}
+
+/* ---------- Panel del pedido ---------- */
+.t-dialog {
+  width: min(520px, 100%);
+  max-height: 92vh;
+  max-height: 92dvh;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: #fff;
+  color: #4b2e2e;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.t-dialog::backdrop { background: rgba(40, 20, 20, 0.6); }
+.t-dialog[open] { display: flex; flex-direction: column; }
+@media (prefers-reduced-motion: no-preference) {
+  .t-dialog[open] { animation: t-panel 0.25s ease-out; }
+  @keyframes t-panel { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+.t-form { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+.t-dialog-cab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+  background: #4b2e2e;
+  color: #fff8f0;
+}
+.t-dialog-cab h2 { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; font-size: 1.25rem; color: #ffc800; }
+.t-cerrar {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.t-cerrar:focus-visible { outline: 3px solid #ffc800; }
+.t-dialog-cuerpo { overflow-y: auto; padding: 16px 18px 20px; flex: 1; }
+.t-dialog-cuerpo h3 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.05rem;
+  margin: 22px 0 8px;
+  color: #4b2e2e;
+}
+.t-items { list-style: none; padding: 0; margin: 0; }
+.t-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0e4d4;
+}
+.t-item-nombre { font-weight: 700; overflow-wrap: anywhere; }
+.t-item-sub { font-weight: 800; color: #a01a58; justify-self: end; }
+.t-item .t-step { justify-self: start; }
+.t-item .t-quitar {
+  justify-self: end;
+  background: none;
+  border: 0;
+  color: #a01a58;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: underline;
+  min-height: 40px;
+  padding: 0 4px;
+  cursor: pointer;
+}
+.t-vacio-carrito { text-align: center; padding: 26px 0; color: #5a3a2a; }
+.t-resumen { margin-top: 12px; }
+.t-resumen div { display: flex; justify-content: space-between; padding: 4px 0; }
+.t-resumen .t-total { font-size: 1.25rem; font-weight: 800; border-top: 2px solid #4b2e2e; margin-top: 6px; padding-top: 8px; }
+.t-label { display: block; font-weight: 700; margin: 12px 0 4px; }
+.t-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 2px solid #d4216c;
+  border-radius: 10px;
+  background: #fff;
+  color: #4b2e2e;
+  font: inherit;
+  font-size: 1rem;
+}
+.t-input:focus-visible { outline: 3px solid #4b2e2e; outline-offset: 2px; }
+.t-ayuda { font-size: 0.88rem; line-height: 1.45; color: #5a3a2a; margin: 8px 0 0; }
+.t-btn {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+.t-btn--tuu { background: #4b2e2e; }
+.t-btn--tuu:hover { background: #64321b; }
+.t-btn--enviar { background: #157a37; }
+.t-btn--enviar:hover { background: #0f6029; }
+.t-btn:focus-visible { outline: 3px solid #d4216c; outline-offset: 2px; }
+.t-tuu-aviso { font-size: 0.88rem; line-height: 1.45; color: #5a3a2a; margin: 8px 0 0; }
+.t-btn--suave { background: #fff3e6; color: #4b2e2e; border: 2px solid #4b2e2e; }
+.t-yapague { margin-top: 12px; padding: 12px; border-radius: 12px; background: #fff8f0; border: 1px dashed #b98a5c; }
+.t-yapague p { margin: 0; font-size: 0.92rem; line-height: 1.45; color: #4b2e2e; }
+.t-yapague .t-btn { margin-top: 8px; }
+.t-yapague[hidden] { display: none; }
+/* Productos de temporada (A_PEDIDO con `temporada`): etiqueta verde navideña para distinguirlos de "A pedido". */
+.t-card--temporada .t-badge { background: #1e6b3a; color: #fff; }
+/* Campo trampa para bots: fuera de la vista y de la lectura de pantalla; las personas nunca lo ven. */
+.t-trampa { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+body.t-bloqueado { overflow: hidden; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px) {
+  .t-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .t-card { border-radius: 16px; }
+  .t-card-cuerpo { padding: 10px 10px 12px; }
+  .t-card h3 { font-size: 0.95rem; }
+  .t-desc { font-size: 0.82rem; -webkit-line-clamp: 2; }
+  .t-pie { flex-direction: column; align-items: stretch; gap: 8px; }
+  .t-precio { font-size: 1.2rem; }
+  .t-add { width: 100%; padding: 10px 8px; }
+  .t-step { justify-content: space-between; width: 100%; }
+  .t-step output { flex: 1; }
+  .t-card--consulta { grid-column: 1 / -1; }
+  .t-dialog {
+    width: 100%;
+    max-width: 100%;
+    margin: auto 0 0;
+    border-radius: 22px 22px 0 0;
+  }
+}
+@media (max-width: 380px) {
+  .t-pasos { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-card, .t-add { transition: none; }
+  .t-card:hover { transform: none; }
+}
+
+.t-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* styles.css pinta de rosa y agranda (scale 1.05) cualquier button en :hover/:focus.
+   Aquí cada botón conserva su color y su tamaño; se escopa por padre para ganar en especificidad. */
+.t-main button:hover, .t-main button:focus,
+.t-dialog button:hover, .t-dialog button:focus,
+button.t-barra-carrito:hover, button.t-barra-carrito:focus { transform: none; }
+.t-main button:active, .t-dialog button:active, button.t-barra-carrito:active { transform: none; }
+
+.t-main .t-chip, .t-main .t-chip:hover, .t-main .t-chip:focus { background-color: #fff; color: #4b2e2e; }
+.t-main .t-chip:hover { background-color: #fff0f6; }
+.t-main .t-chip[aria-pressed="true"],
+.t-main .t-chip[aria-pressed="true"]:hover,
+.t-main .t-chip[aria-pressed="true"]:focus { background-color: #4b2e2e; color: #ffc800; }
+
+.t-main .t-add, .t-main .t-add:focus { background-color: #d4216c; color: #fff; }
+.t-main .t-add:hover { background-color: #b01859; }
+.t-main .t-step button, .t-main .t-step button:hover, .t-main .t-step button:focus,
+.t-dialog .t-step button, .t-dialog .t-step button:hover, .t-dialog .t-step button:focus { background-color: #157a37; color: #fff; }
+.t-main .t-mas, .t-main .t-mas:hover, .t-main .t-mas:focus,
+.t-dialog .t-quitar, .t-dialog .t-quitar:hover, .t-dialog .t-quitar:focus { background-color: transparent; color: #a01a58; }
+
+.t-dialog .t-cerrar, .t-dialog .t-cerrar:hover, .t-dialog .t-cerrar:focus { background-color: rgba(255, 255, 255, 0.18); color: #fff; }
+.t-dialog .t-btn--tuu, .t-dialog .t-btn--tuu:focus { background-color: #4b2e2e; color: #fff; }
+.t-dialog .t-btn--tuu:hover { background-color: #64321b; }
+.t-dialog .t-btn--enviar, .t-dialog .t-btn--enviar:focus { background-color: #157a37; color: #fff; }
+.t-dialog .t-btn--enviar:hover { background-color: #0f6029; }
+.t-dialog .t-btn--suave, .t-dialog .t-btn--suave:focus { background-color: #fff3e6; color: #4b2e2e; }
+.t-dialog .t-btn--suave:hover { background-color: #ffe7cc; color: #4b2e2e; }
+.t-dialog .t-btn[disabled] { opacity: 0.6; cursor: default; }
+
+button.t-barra-carrito, button.t-barra-carrito:hover, button.t-barra-carrito:focus { background-color: #4b2e2e; color: #fff8f0; }
+.t-step button { border-radius: 0; padding: 0; margin: 0; }
+
+/* Aviso de sellos, alérgenos y entregas (arriba del catálogo) */
+.t-aviso {
+  max-width: 820px;
+  margin: 18px auto 0;
+  padding: 14px 18px;
+  background: #fff;
+  border: 2px solid #ffc800;
+  border-left-width: 8px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(75, 46, 46, 0.1);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #4b2e2e;
+}
+.t-aviso p { margin: 0 0 8px; font-size: inherit; }
+.t-aviso p:last-child { margin-bottom: 0; }
+.t-aviso a, .t-ayuda a { color: #a01a58; font-weight: 700; }
+
+/* Con la barra del carrito visible, deja espacio para llegar al final del pie de página. */
+body.t-con-barra { padding-bottom: 84px; }
+
+/* ---------- Portada: "Los más pedidos" (js/destacados.js) ---------- */
+.t-portada { padding: 22px 16px 8px; text-align: center; }
+.t-portada > h2 { font-size: 1.9rem; margin: 0 0 4px; }
+.t-portada-sub { margin: 0 0 16px; font-size: 1.02rem; }
+.t-portada .t-grid { text-align: left; }
+.t-portada-mas { margin: 20px 0 0; }
+/* Acceso a una parte de la Tienda (barras, personalizados): tarjeta completa como enlace, sin precio. */
+a.t-card--acceso { color: #4b2e2e; text-decoration: none; }
+a.t-card--acceso:hover, a.t-card--acceso:focus-visible { color: #4b2e2e; box-shadow: 0 10px 24px rgba(75, 46, 46, 0.22); }
+a.t-card--acceso:focus-visible { outline: 3px solid #d4216c; outline-offset: 3px; }
+.t-acceso-btn {
+  display: inline-block;
+  margin-top: auto;
+  align-self: flex-start;
+  background: #4b2e2e;
+  color: #ffc800;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+/* Motivos para confiar, junto a los productos. */
+.confianza {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.confianza li {
+  background: #fff;
+  border: 2px solid #ffc800;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #4b2e2e;
+}
+.confianza a { color: #4b2e2e; text-decoration: underline; }
+/* En la portada la barra del pedido es un enlace a la Tienda (mismo aspecto que el botón). */
+a.t-barra-carrito, a.t-barra-carrito:hover, a.t-barra-carrito:focus { color: #fff8f0; text-decoration: none; }
+
+/* ---------- Tienda: productos primero ---------- */
+.t-intro-linea { text-align: center; max-width: 680px; margin: 0 auto; font-size: 0.98rem; line-height: 1.4; }
+/* El aviso es un <details>: el resumen (siempre visible) lleva las advertencias; abierto muestra detalle y entregas. */
+details.t-aviso { margin-top: 12px; padding: 10px 14px; font-size: 0.9rem; line-height: 1.45; }
+details.t-aviso > summary { cursor: pointer; list-style: none; }
+details.t-aviso > summary::-webkit-details-marker { display: none; }
+details.t-aviso > summary:focus-visible { outline: 3px solid #d4216c; outline-offset: 3px; border-radius: 6px; }
+.t-aviso-mas { color: #a01a58; font-weight: 700; text-decoration: underline; white-space: nowrap; }
+.t-aviso-mas::after { content: " ▾"; }
+details.t-aviso[open] .t-aviso-mas::after { content: " ▴"; }
+details.t-aviso[open] > summary { margin-bottom: 8px; }
+.t-main { padding-top: 14px; }
+.t-barra { margin-top: 10px; }
+/* En el celular el banner de la Tienda es más bajo: lo importante aquí son los productos. */
+@media (max-width: 720px) {
+  #page-banner .page-banner { padding: 14px 16px 16px; }
+  #page-banner .page-banner__emoji { display: none; }
+  #page-banner .page-banner__titulo { margin: 0 0 2px; }
+  .t-intro-linea { font-size: 0.92rem; }
+  .t-buscar { font-size: 1.1rem; }
+}
+/* En temporada, deja lugar a la guirnalda para que no tape el título del banner compacto. */
+@media (max-width: 720px) {
+  .temporada #page-banner .page-banner { padding-top: 38px; }
+}
+/* Portada en celular (2 columnas): si la última tarjeta queda sola, ocupa el ancho completo en horizontal. */
+@media (max-width: 720px) {
+  .t-portada .t-grid > a.t-card--acceso:last-child:nth-child(odd) { grid-column: 1 / -1; flex-direction: row; align-items: stretch; }
+  .t-portada .t-grid > a.t-card--acceso:last-child:nth-child(odd) img { width: 42%; flex: 0 0 42%; }
+}
+
+/* ---------- Etapa 2: pedido con menos idas y vueltas ----------
+   Entrega y forma de pago como opciones de un toque (radios con forma de botón) y campo de sabores/detalles.
+   Son opcionales y van solo en el mensaje de WhatsApp. El pago con tarjeta aparece al elegir "Tarjeta". */
+.t-opciones { border: 0; padding: 0; margin: 20px 0 0; min-width: 0; }
+.t-opciones legend { padding: 0; margin-bottom: 8px; font-weight: 700; font-size: 1.05rem; color: #4b2e2e; }
+.t-opcional { font-weight: 400; font-size: 0.85rem; color: #5a3a2a; }
+.t-opciones-fila { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.t-opcion { position: relative; display: block; cursor: pointer; }
+.t-opcion input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.t-opcion span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 5px 4px;
+  border: 2px solid #d9c3a5;
+  border-radius: 12px;
+  background: #fff;
+  color: #4b2e2e;
+  text-align: center;
+  line-height: 1.2;
+}
+.t-opcion strong { font-size: 0.9rem; overflow-wrap: anywhere; }
+.t-opcion small { font-size: 0.76rem; color: #5a3a2a; }
+.t-opcion input:checked + span { border-color: #157a37; background: #eaf6ee; box-shadow: inset 0 0 0 1px #157a37; }
+.t-opcion input:focus-visible + span { outline: 3px solid #4b2e2e; outline-offset: 2px; }
+.t-detalles { resize: vertical; min-height: 64px; font-family: inherit; }
+.t-detalles::placeholder { color: #7a5c4c; opacity: 1; }
+.t-enviado { margin: 12px 0 0; padding: 12px; border-radius: 12px; background: #eaf6ee; border: 1px solid #157a37; color: #1d4d2c; font-size: 0.95rem; line-height: 1.45; }
+.t-enviado[hidden], .t-pago-tarjeta[hidden] { display: none; }
+.t-enviado a { color: #0f6029; font-weight: 700; }
+.t-pago-tarjeta { margin-top: 18px; padding: 4px 14px 14px; border-radius: 12px; background: #fff8f0; border: 1px solid #e6d2b8; }
+.t-pago-tarjeta h3 { margin-top: 12px; }
+.t-dialog-pie { padding: 10px 18px 14px; border-top: 1px solid #f0e4d4; background: #fff; box-shadow: 0 -6px 14px rgba(75, 46, 46, 0.08); }
+.t-dialog-pie[hidden] { display: none; }
+.t-dialog-pie .t-btn { margin-top: 0; }
+.t-dialog-pie .t-enviado { margin: 0 0 10px; }

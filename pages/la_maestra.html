@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://i.imgur.com https://*.goatcounter.com data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://lfgfmequzmlajlvkjxlv.supabase.co; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self' https://wa.me;">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <title>Inés Saavedra, maestra chocolatera | Matichoc</title>
+  <meta name="description" content="Conoce a Inés Saavedra, fundadora de Matichoc y maestra chocolatera: cómo empezó, sus reconocimientos y su formación constante.">
+  <link rel="canonical" href="https://matichoc.cl/pages/la_maestra.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Matichoc">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:title" content="Inés Saavedra, maestra chocolatera | Matichoc">
+  <meta property="og:description" content="Conoce a Inés Saavedra, fundadora de Matichoc y maestra chocolatera: cómo empezó, sus reconocimientos y su formación constante.">
+  <meta property="og:url" content="https://matichoc.cl/pages/la_maestra.html">
+  <meta property="og:image" content="https://matichoc.cl/assets/brand/og-matichoc.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Matichoc, pasión por el cacao">
+  <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/x-icon" href="../assets/brand/favicon.ico">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/brand/icon-512.png">
+    <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/chocolate-wow.css" />
+    <link rel="stylesheet" href="../css/matichico-guia.css" />
+    <script src="../js/revelar.js"></script>
+    <style>
+        .maestra { max-width: 1000px; margin: 0 auto; padding: 24px 16px 60px; }
+
+        /* ---------- Presentación ---------- */
+        .m-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+            gap: 28px;
+            align-items: center;
+        }
+        .m-visor {
+            background: #4b2e2e;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 10px 28px rgba(75, 46, 46, 0.25);
+        }
+        .m-visor-foto {
+            display: block;
+            width: 100%;
+            height: 340px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #3a2222;
+        }
+        .m-miniaturas {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            overflow-x: auto;
+            padding: 2px;
+            scrollbar-width: none;
+            /* Se desvanece a la derecha para que se note que hay más fotos al deslizar. */
+            -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+            mask-image: linear-gradient(90deg, #000 85%, transparent);
+        }
+        .m-miniaturas::-webkit-scrollbar { display: none; }
+        .m-mini {
+            flex: 0 0 auto;
+            width: 56px;
+            height: 56px;
+            padding: 0;
+            border: 3px solid transparent;
+            border-radius: 10px;
+            background: #3a2222;
+            cursor: pointer;
+            overflow: hidden;
+            opacity: 0.7;
+        }
+        .m-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .m-mini[aria-current="true"] { border-color: #ffc800; opacity: 1; }
+        .m-mini:focus-visible { outline: 3px solid #ffc800; outline-offset: 2px; }
+
+        .m-kicker {
+            display: inline-block;
+            background: #d4216c;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 999px;
+            margin: 0 0 10px;
+        }
+        .m-hero h2 { font-size: 2.6rem; margin: 0 0 6px; }
+        .m-rol { font-size: 1.1rem; color: #4b2e2e; margin: 0 0 16px; font-weight: 600; }
+        .m-datos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .m-datos li {
+            background: #4b2e2e;
+            color: #fff8f0;
+            border-radius: 14px;
+            padding: 10px 12px;
+            line-height: 1.25;
+            font-size: 0.85rem;
+        }
+        .m-datos strong { display: block; font-family: var(--font-display); font-size: 1.5rem; color: #ffc800; }
+
+        /* ---------- Pestañas ---------- */
+        .m-tabs { margin-top: 36px; }
+        .m-tablist {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 4px 2px 10px;
+            scrollbar-width: none;
+        }
+        .m-tablist::-webkit-scrollbar { display: none; }
+        .m-tab {
+            flex: 0 0 auto;
+            min-height: 44px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 2px solid #4b2e2e;
+            background: #fff;
+            color: #4b2e2e;
+            font: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .m-tab[aria-selected="true"] { background: #4b2e2e; color: #ffc800; }
+        .m-tab:focus-visible { outline: 3px solid #d4216c; outline-offset: 2px; }
+        .m-panel {
+            background: #fff;
+            border-radius: 18px;
+            border-top: 6px solid #ffc800;
+            box-shadow: 0 8px 22px rgba(75, 46, 46, 0.12);
+            padding: 22px;
+        }
+        .m-panel h2 { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1.3rem; margin: 0 0 10px; color: #4b2e2e; }
+        .m-panel p { font-size: 1.02rem; line-height: 1.65; color: #4b2e2e; margin: 0; }
+        .m-tabs-js .m-panel[hidden] { display: none; }
+        .m-tabs:not(.m-tabs-js) .m-panel { margin-bottom: 16px; }
+        .m-tabs:not(.m-tabs-js) .m-tablist { display: none; }
+        .m-panel.m-anima { animation: m-entra 0.35s ease; }
+        @keyframes m-entra { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+        .m-insignias, .m-chips { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+        .m-insignias li {
+            background: #fff8f0;
+            border: 2px solid #ffc800;
+            border-radius: 14px;
+            padding: 8px 14px;
+            font-weight: 700;
+            color: #4b2e2e;
+        }
+        .m-insignias li::before { content: "🏅 "; }
+        .m-insignias small { display: block; font-weight: 500; font-size: 0.85rem; margin-top: 2px; }
+        .m-ensena { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+        .m-ensena li { border-left: 4px solid #ffc800; padding: 4px 0 4px 12px; color: #4b2e2e; line-height: 1.5; }
+        .m-ensena strong { display: block; color: #d4216c; }
+        ul.m-chips li { border-radius: 14px; }
+        .m-chips small { display: block; color: #fff8f0; font-weight: 400; font-size: 0.8rem; }
+        .m-datos li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+        /* Insignia con foto: la miniatura abre esa foto en el visor de arriba. */
+        ul.m-insignias li.m-insignia--foto { display: flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; }
+        ul.m-insignias li.m-insignia--foto::before { content: none; }
+        .m-insignia-foto { flex: 0 0 auto; width: 48px; height: 48px; padding: 0; border: 2px solid #ffc800; border-radius: 10px; overflow: hidden; cursor: zoom-in; background: #3a2222; }
+        .m-insignia-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .m-insignia-foto:focus-visible { outline: 3px solid #d4216c; outline-offset: 2px; }
+        /* Cursos y docencia con foto (Siempre aprendiendo y Hoy). */
+        li.m-con-foto { display: flex; align-items: center; gap: 10px; }
+        ul.m-chips li.m-con-foto { padding: 6px 14px 6px 6px; }
+        .m-chips li {
+            background: #4b2e2e;
+            color: #ffc800;
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        /* ---------- Cita y medios ---------- */
+        .m-cita {
+            margin: 36px 20px 0 !important;
+            padding: 26px 22px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #4b2e2e, #64321b);
+            color: #fff8f0;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            line-height: 1.45;
+        }
+        .m-cita::before { content: "“"; display: block; color: #ffc800; font-size: 3rem; line-height: 0.6; }
+        .m-cita cite { display: block; margin-top: 12px; font-family: 'Segoe UI', sans-serif; font-size: 0.95rem; font-style: normal; color: #ffc800; }
+
+        /* Ferias y eventos: el "currículum" de Matichoc en la provincia. */
+        .m-ferias { margin-top: 36px; scroll-margin-top: 90px; }
+        .m-ferias h2 { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1.3rem; text-align: center; margin: 0 0 14px; color: #4b2e2e; }
+        .m-ferias-plaza { display: flex; align-items: center; gap: 12px; max-width: 560px; margin: 0 auto 16px; background: #4b2e2e; color: #fff8f0; border-radius: 16px; padding: 10px 16px 10px 10px; line-height: 1.4; }
+        .m-ferias-plaza strong { display: block; color: #ffc800; }
+        .m-ferias-plaza .m-insignia-foto { width: 64px; height: 64px; }
+        .m-ferias-intro { text-align: center; color: #4b2e2e; margin: 0 0 14px; }
+        .m-ferias-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+        .m-feria { background: #fff; border-radius: 16px; border-top: 5px solid #d4216c; box-shadow: 0 6px 18px rgba(75, 46, 46, 0.1); padding: 16px; }
+        .m-feria h3 { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1.05rem; margin: 0 0 8px; color: #4b2e2e; }
+        .m-feria ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+        .m-feria li { color: #4b2e2e; line-height: 1.35; }
+        .m-feria li:not(.m-con-foto)::before { content: "• "; color: #d4216c; font-weight: 700; }
+        .m-feria .m-insignia-foto { width: 40px; height: 40px; }
+
+        .m-medios { margin-top: 36px; }
+        .m-medios h2 { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1.3rem; text-align: center; margin-bottom: 14px; color: #4b2e2e; }
+        /* Entrevistas: tarjeta con portada (foto propia en assets/medios/) y franja de color según el medio. */
+        .m-medios-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+        .m-medio {
+            display: flex;
+            flex-direction: column;
+            border-radius: 18px;
+            overflow: hidden;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 6px 16px rgba(75, 46, 46, 0.18);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .m-medio:hover, .m-medio:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28); }
+        .m-medio:focus-visible { outline: 3px solid #ffc800; outline-offset: 3px; }
+        .m-medio-foto { position: relative; display: block; aspect-ratio: 1; background: #ead9c4; }
+        .m-medio-foto img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .m-medio-foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.35)); }
+        .m-medio-play {
+            position: absolute; left: 50%; top: 50%; z-index: 1;
+            width: 58px; height: 58px; margin: -29px 0 0 -29px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.92); color: #4b2e2e;
+            font-size: 1.4rem; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+        }
+        .m-medio-nuevo {
+            position: absolute; top: 10px; left: 10px; z-index: 1;
+            background: #ffc800; color: #4b2e2e; font-weight: 800; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 999px;
+        }
+        .m-medio-texto { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px 16px; flex: 1; }
+        .m-medio small { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.92; }
+        .m-medio strong { font-size: 1.05rem; line-height: 1.3; }
+        .m-medio--eclipse { background: #4b2e2e; }
+        .m-medio--tv { background: #a01a58; }
+        .m-medio--radio { background: #365899; }
+
+        /* ---------- Aparición al scroll ---------- */
+        .js-reveal [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .js-reveal [data-reveal].is-visible { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .m-panel.m-anima { animation: none; }
+            .m-medio { transition: none; }
+        }
+
+        @media (max-width: 720px) {
+            .m-hero { grid-template-columns: minmax(0, 1fr); }
+            .m-hero h2 { font-size: 2rem; }
+            .m-visor-foto { height: 300px; }
+            .m-panel { padding: 18px 16px; }
+            .m-cita { font-size: 1.15rem; }
+            /* Celular: una entrevista por fila, foto chica a la izquierda y texto a la derecha. */
+            .m-medios-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+            .m-medio { flex-direction: row; align-items: stretch; }
+            .m-medio-foto { flex: 0 0 116px; width: 116px; }
+            .m-medio-texto { justify-content: center; padding: 12px 14px; }
+            .m-medio-play { width: 40px; height: 40px; margin: -20px 0 0 -20px; font-size: 1rem; }
+            .m-medio-nuevo { top: 6px; left: 6px; font-size: 0.65rem; padding: 3px 7px; }
+        }
+    </style>
+</head>
+<body>
+    <header id="header"><nav class="seo-fallback" aria-label="Menú principal"><a href="../index.html">Inicio</a><a href="../pages/tienda.html">Tienda</a><a href="../pages/la_maestra.html">La Maestra</a><a href="../pages/historia.html">Historia</a><a href="../pages/opiniones.html">Opiniones</a><a href="../pages/contacto.html">Contacto</a><a href="../matijuego/">Matijuego</a></nav></header>
+<div id="page-banner"><h1 class="seo-fallback">La Maestra Chocolatera</h1></div>
+
+    <main class="maestra">
+        <section class="m-hero" aria-labelledby="m-titulo">
+            <div class="m-visor">
+                <img class="m-visor-foto" id="mFoto" src="../assets/maestra/01-discurso.webp" alt="Inés Saavedra, maestra chocolatera de Matichoc, dando un discurso (foto 1 de 22)" fetchpriority="high" />
+                <div class="m-miniaturas" role="group" aria-label="Fotos de Inés (toca una para verla grande; desliza para ver más)">
+                    <button type="button" class="m-mini" aria-current="true" data-foto="../assets/maestra/01-discurso.webp" data-texto="dando un discurso" aria-label="Ver foto 1: dando un discurso"><img src="../assets/maestra/01-discurso-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/11-capital-emprendedor-sopraval.webp" data-texto="en el programa Capital Emprendedor de Sopraval" aria-label="Ver foto 2: en el programa Capital Emprendedor de Sopraval"><img src="../assets/maestra/11-capital-emprendedor-sopraval-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/12-expo-fosis.webp" data-texto="en su stand de la Expo FOSIS" aria-label="Ver foto 3: en su stand de la Expo FOSIS"><img src="../assets/maestra/12-expo-fosis-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/13-profesora-nahuen.webp" data-texto="haciendo clases de chocolatería en el Centro de Capacitación Nahuen" aria-label="Ver foto 4: haciendo clases de chocolatería en el Centro de Capacitación Nahuen"><img src="../assets/maestra/13-profesora-nahuen-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/14-constancia-u-valparaiso.webp" data-texto="con su constancia de la Universidad de Valparaíso" aria-label="Ver foto 5: con su constancia de la Universidad de Valparaíso"><img src="../assets/maestra/14-constancia-u-valparaiso-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/15-diploma-emprendimiento.webp" data-texto="recibiendo un diploma de emprendimiento" aria-label="Ver foto 6: recibiendo un diploma de emprendimiento"><img src="../assets/maestra/15-diploma-emprendimiento-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/17-cft-pucv.webp" data-texto="en el CFT de la Pontificia Universidad Católica de Valparaíso" aria-label="Ver foto 7: en el CFT de la Pontificia Universidad Católica de Valparaíso"><img src="../assets/maestra/17-cft-pucv-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/16-feria-papudo-inauguracion.webp" data-texto="inaugurando la Feria de Emprendedoras de la Municipalidad de Papudo" aria-label="Ver foto 8: inaugurando la Feria de Emprendedoras de la Municipalidad de Papudo"><img src="../assets/maestra/16-feria-papudo-inauguracion-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/18-feria-papudo-stand.webp" data-texto="en su stand de la Feria de Emprendedoras de Papudo" aria-label="Ver foto 9: en su stand de la Feria de Emprendedoras de Papudo"><img src="../assets/maestra/18-feria-papudo-stand-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/02-charla-escenario.webp" data-texto="dando una charla en un escenario" aria-label="Ver foto 10: dando una charla en un escenario"><img src="../assets/maestra/02-charla-escenario-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/03-charla-los-inicios.webp" data-texto="contando los inicios de Matichoc en un seminario" aria-label="Ver foto 11: contando los inicios de Matichoc en un seminario"><img src="../assets/maestra/03-charla-los-inicios-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/04-reconocimiento-municipal.webp" data-texto="recibiendo un reconocimiento de la Municipalidad de La Ligua" aria-label="Ver foto 12: recibiendo un reconocimiento de la Municipalidad de La Ligua"><img src="../assets/maestra/04-reconocimiento-municipal-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/05-diploma.webp" data-texto="con su diploma" aria-label="Ver foto 13: con su diploma"><img src="../assets/maestra/05-diploma-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/06-seminario-jefas-de-hogar.webp" data-texto="en el seminario del Programa Mujeres Jefas de Hogar" aria-label="Ver foto 14: en el seminario del Programa Mujeres Jefas de Hogar"><img src="../assets/maestra/06-seminario-jefas-de-hogar-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/07-inauguracion-jefas-de-hogar.webp" data-texto="en una inauguración del Programa Mujeres Jefas de Hogar" aria-label="Ver foto 15: en una inauguración del Programa Mujeres Jefas de Hogar"><img src="../assets/maestra/07-inauguracion-jefas-de-hogar-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/08-gobierno-en-terreno.webp" data-texto="en una actividad de Gobierno en Terreno" aria-label="Ver foto 16: en una actividad de Gobierno en Terreno"><img src="../assets/maestra/08-gobierno-en-terreno-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/09-stand-matichoc.webp" data-texto="en el stand de Matichoc" aria-label="Ver foto 17: en el stand de Matichoc"><img src="../assets/maestra/09-stand-matichoc-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="../assets/maestra/10-stand-feria.webp" data-texto="en el stand de Matichoc en la plaza" aria-label="Ver foto 18: en el stand de Matichoc en la plaza"><img src="../assets/maestra/10-stand-feria-mini.webp" alt="" width="120" height="120" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="https://i.imgur.com/rEex4wf.png" aria-label="Ver foto 19"><img src="https://i.imgur.com/rEex4wf.png" alt="" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="https://i.imgur.com/Ji3vvrP.png" aria-label="Ver foto 20"><img src="https://i.imgur.com/Ji3vvrP.png" alt="" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="https://i.imgur.com/HkiWYrG.png" aria-label="Ver foto 21"><img src="https://i.imgur.com/HkiWYrG.png" alt="" loading="lazy" /></button>
+                    <button type="button" class="m-mini" data-foto="https://i.imgur.com/JpG4dmt.png" aria-label="Ver foto 22"><img src="https://i.imgur.com/JpG4dmt.png" alt="" loading="lazy" /></button>
+                </div>
+            </div>
+            <div>
+                <p class="m-kicker">Fundadora de Matichoc</p>
+                <h2 id="m-titulo">Inés Saavedra</h2>
+                <p class="m-rol">La Maestra Chocolatera</p>
+                <ul class="m-datos">
+                    <li><strong>2011</strong>empezó con una libreta y un coche</li>
+                    <li><strong>6</strong>fondos y programas de apoyo: Gobernación, Sopraval, FOSIS y PRODEMU</li>
+                    <li><strong>2022</strong>profesora de chocolatería para adultos y niños</li>
+                    <li><strong>U. de Valparaíso</strong>diseño de proyectos e innovación social</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="m-tabs" id="mTabs" aria-label="Conoce a Inés" data-reveal>
+            <div class="m-tablist" role="tablist" aria-label="Secciones sobre Inés">
+                <button type="button" class="m-tab" role="tab" id="tab-empezo" aria-controls="panel-empezo" aria-selected="true">🍫 Cómo empezó</button>
+                <button type="button" class="m-tab" role="tab" id="tab-reconoc" aria-controls="panel-reconoc" aria-selected="false" tabindex="-1">🏅 Reconocimientos</button>
+                <button type="button" class="m-tab" role="tab" id="tab-aprende" aria-controls="panel-aprende" aria-selected="false" tabindex="-1">📚 Siempre aprendiendo</button>
+                <button type="button" class="m-tab" role="tab" id="tab-hoy" aria-controls="panel-hoy" aria-selected="false" tabindex="-1">🎓 Hoy</button>
+            </div>
+
+            <div class="m-panel" role="tabpanel" id="panel-empezo" aria-labelledby="tab-empezo" tabindex="0">
+                <h2>Cómo empezó</h2>
+                <p>Inés Saavedra, fundadora de Matichoc, inició este delicioso viaje en 2011 con su hijo Matías en coche y una libreta en mano, anotando los primeros pedidos para fechas importantes como el Día de la Madre. Lo que partió como una idea familiar fue creciendo con esfuerzo, amor y formación constante, hasta convertirse en un verdadero referente del chocolate artesanal en la región.</p>
+            </div>
+
+            <div class="m-panel" role="tabpanel" id="panel-reconoc" aria-labelledby="tab-reconoc" tabindex="0" hidden>
+                <h2>Reconocimientos</h2>
+                <p>A lo largo de estos años, ha sido reconocida por su dedicación y talento a través de importantes fondos y programas de apoyo:</p>
+                <ul class="m-insignias">
+                    <li>Gobernación<small>Fondo ORASMI</small></li>
+                    <li class="m-insignia--foto"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/11-capital-emprendedor-sopraval.webp" aria-label="Ver la foto de Capital Emprendedor Sopraval"><img src="../assets/maestra/11-capital-emprendedor-sopraval-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span>Sopraval<small>Programa Capital Emprendedor</small></span></li>
+                    <li>FOSIS<small>Emprendamos Avanzado Individual</small></li>
+                    <li>FOSIS<small>Emprendamos Grupal</small></li>
+                    <li class="m-insignia--foto"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/12-expo-fosis.webp" aria-label="Ver la foto de la Expo FOSIS"><img src="../assets/maestra/12-expo-fosis-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span>FOSIS<small>Emprendamos Feria (Expo Feria)</small></span></li>
+                    <li>PRODEMU<small>Aprendiendo a Emprender</small></li>
+                </ul>
+            </div>
+
+            <div class="m-panel" role="tabpanel" id="panel-aprende" aria-labelledby="tab-aprende" tabindex="0" hidden>
+                <h2>Siempre aprendiendo</h2>
+                <p>Su constante capacitación la ha llevado a profesionalizar cada aspecto de su trabajo:</p>
+                <ul class="m-chips">
+                    <li class="m-con-foto"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/14-constancia-u-valparaiso.webp" aria-label="Ver la foto de su constancia de la Universidad de Valparaíso"><img src="../assets/maestra/14-constancia-u-valparaiso-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span>Diseño de proyectos e innovación social<small>Universidad de Valparaíso, Escuela de Emprendedores Sociales</small></span></li>
+                    <li class="m-con-foto"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/06-seminario-jefas-de-hogar.webp" aria-label="Ver la foto del seminario del Programa Mujeres Jefas de Hogar"><img src="../assets/maestra/06-seminario-jefas-de-hogar-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span>Formación para el trabajo<small>Programa Jefas de Hogar</small></span></li>
+                    <li>Taller de coctelería<small>Programa Jefas de Hogar</small></li>
+                    <li>Manipulación de alimentos</li>
+                    <li>Contabilidad</li>
+                    <li>Formalización</li>
+                    <li>Digitalización del emprendimiento</li>
+                </ul>
+            </div>
+
+            <div class="m-panel" role="tabpanel" id="panel-hoy" aria-labelledby="tab-hoy" tabindex="0" hidden>
+                <h2>Hoy</h2>
+                <p>Además de crear chocolates irresistibles, Inés también enseña su arte en centros de formación y actividades comunitarias, formando a nuevas emprendedoras y compartiendo su sabiduría con pasión.</p>
+                <ul class="m-ensena">
+                    <li class="m-con-foto"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/13-profesora-nahuen.webp" aria-label="Ver la foto de sus clases en el Centro de Capacitación Nahuen"><img src="../assets/maestra/13-profesora-nahuen-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span><strong>2022 – 2024</strong>Profesora de chocolatería en el Centro de Capacitación Nahuen, con cursos para adultos y niños.</span></li>
+                    <li><strong>Desde 2025</strong>Capacitaciones particulares de chocolatería.</li>
+                </ul>
+            </div>
+        </section>
+
+        <blockquote class="m-cita" data-reveal>
+            El chocolate no solo se hace con cacao, también con cariño, arte y raíces.
+            <cite>— Inés Saavedra</cite>
+        </blockquote>
+
+        <section class="m-ferias" id="ferias" aria-labelledby="m-ferias-t" data-reveal>
+            <h2 id="m-ferias-t">Ferias y eventos de la provincia</h2>
+            <p class="m-ferias-plaza"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/10-stand-feria.webp" aria-label="Ver la foto del stand en la plaza"><img src="../assets/maestra/10-stand-feria-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span><strong>Todos los martes y jueves en la plaza de La Ligua</strong>de 8:30 a 17:00 hrs, con nuestro stand.</span></p>
+            <p class="m-ferias-intro">Y con Matichoc, Inés ha estado en los eventos más importantes de la provincia:</p>
+            <div class="m-ferias-grid">
+                <div class="m-feria">
+                    <h3>🎉 Aniversarios</h3>
+                    <ul>
+                        <li>Aniversario de La Ligua</li>
+                        <li>Aniversario de Cabildo</li>
+                        <li>Aniversario de Petorca</li>
+                    </ul>
+                </div>
+                <div class="m-feria">
+                    <h3>🎪 Expos</h3>
+                    <ul>
+                        <li>Expo Vive Papudo</li>
+                        <li>Expo La Ligua</li>
+                        <li class="m-con-foto"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/12-expo-fosis.webp" aria-label="Ver la foto de la Expo FOSIS"><img src="../assets/maestra/12-expo-fosis-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span>Expo FOSIS</span></li>
+                    </ul>
+                </div>
+                <div class="m-feria">
+                    <h3>🛍️ Ferias</h3>
+                    <ul>
+                        <li>Cocinando con el Diablo, Petorca</li>
+                        <li>Feria de la Virgen, Cabildo</li>
+                        <li>Feria de Invierno, Cabildo</li>
+                        <li class="m-con-foto"><button type="button" class="m-insignia-foto" data-ver="../assets/maestra/18-feria-papudo-stand.webp" aria-label="Ver la foto de la Feria de Emprendedoras de Papudo"><img src="../assets/maestra/18-feria-papudo-stand-mini.webp" alt="" width="120" height="120" loading="lazy" /></button><span>Feria de Emprendedoras, Papudo</span></li>
+                        <li>Ferias de verano</li>
+                    </ul>
+                </div>
+                <div class="m-feria">
+                    <h3>🤠 Fiestas costumbristas</h3>
+                    <ul>
+                        <li>Fiesta costumbrista de Catapilco</li>
+                        <li>Fiesta costumbrista y carrera a la chilena de El Llano</li>
+                        <li>Fiesta del Cabrito, Palquico</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="m-medios" aria-labelledby="m-medios-t" data-reveal>
+            <h2 id="m-medios-t">Escúchala y mírala en los medios</h2>
+            <div class="m-medios-grid">
+                <a class="m-medio m-medio--eclipse" href="https://www.facebook.com/eclipse.laligua.39/videos/mujeres-de-nuestra-tierra/1443848683760328/" target="_blank" rel="noopener noreferrer">
+                    <span class="m-medio-foto">
+                        <img src="../assets/medios/eclipse-mujeres-emprendedoras.webp" width="600" height="600" alt="" loading="lazy" decoding="async">
+                        <span class="m-medio-nuevo">Nuevo</span>
+                        <span class="m-medio-play" aria-hidden="true">▶</span>
+                    </span>
+                    <span class="m-medio-texto">
+                        <small>📺 Video · Eclipse La Ligua</small>
+                        <strong>Mujeres emprendedoras que crean su propio camino</strong>
+                    </span>
+                </a>
+                <a class="m-medio m-medio--tv" href="https://www.youtube.com/watch?v=ZcNYsStM7rI" target="_blank" rel="noopener noreferrer">
+                    <span class="m-medio-foto">
+                        <img src="../assets/medios/tv-la-ligua.webp" width="600" height="600" alt="" loading="lazy" decoding="async">
+                        <span class="m-medio-play" aria-hidden="true">▶</span>
+                    </span>
+                    <span class="m-medio-texto">
+                        <small>📺 Video · TV La Ligua</small>
+                        <strong>Entrevista en TV La Ligua</strong>
+                    </span>
+                </a>
+                <a class="m-medio m-medio--radio" href="https://www.facebook.com/montealegrefm/posts/pfbid02oN2rAttEQ46tTFawLuLzHoV6VZgjXxtV2fiwMZV5DCuVAr2ygcNjLaqB9QhginMPl?rdid=K30j9qC5RZNtaXQJ#" target="_blank" rel="noopener noreferrer">
+                    <span class="m-medio-foto">
+                        <img src="../assets/medios/radio-montealegre.webp" width="600" height="600" alt="" loading="lazy" decoding="async">
+                        <span class="m-medio-play" aria-hidden="true">🎧</span>
+                    </span>
+                    <span class="m-medio-texto">
+                        <small>📻 Radio · Montealegre FM</small>
+                        <strong>Entrevista en Radio Montealegre</strong>
+                    </span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer"><nav class="seo-fallback" aria-label="Información legal"><a href="../pages/terminos.html">Términos y condiciones</a><a href="../pages/privacidad.html">Política de Privacidad</a><a href="../pages/bases-matilover.html">Bases del programa Matilover</a></nav></footer>
+
+    <a href="https://wa.me/56975645591" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.26.86 5.82 2.42a8.2 8.2 0 0 1 2.41 5.82c0 4.53-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.18 8.18 0 0 1-1.26-4.37c0-4.53 3.7-8.23 8.24-8.23m-4.65 4.29c-.15 0-.4.06-.61.3s-.8.78-.8 1.9.82 2.2.94 2.36c.11.15 1.6 2.5 3.95 3.4 1.95.75 2.35.6 2.77.56.42-.04 1.36-.55 1.55-1.09.19-.53.19-.98.13-1.08-.06-.1-.22-.16-.46-.28-.24-.12-1.4-.69-1.62-.77-.22-.08-.37-.12-.53.12-.15.24-.6.77-.74.92-.14.15-.27.17-.51.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.53-1.29-.74-1.76-.19-.46-.39-.4-.53-.4z"/></svg>
+    </a>
+
+    <script src="../js/base.js"></script>
+
+    <script src="../js/analitica.js"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/cuenta.js"></script>
+    <script src="../js/temporadas.js"></script>
+    <script src="../js/brillos.js"></script>
+    <script src="../js/matichico-guia.js"></script>
+    <script src="../js/page-maestra.js"></script>
+</body>
+</html>

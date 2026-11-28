@@ -1,0 +1,204 @@
+// Catálogo de modos de juego de la plataforma "Matichoc Arcade".
+// Cada Matichico y sus atuendos son compartidos entre todos los juegos;
+// lo único que cambia es la mecánica y las canchas de cada modo.
+// Ver ROADMAP.md para el plan de etapas de cada juego "próximamente".
+
+// En la app de tienda (data-app="1") se ocultan los juegos marcados con `appHidden`:
+// la app está pensada para público infantil y no incluye juegos de "disparos".
+const IN_APP = typeof document !== "undefined" && document.documentElement.dataset.app === "1";
+
+const ALL_GAMES = [
+  {
+    id: "town",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Pueblo Matichoc",
+    icon: "🏘️",
+    tagline: "Pasea por el pueblo: fuente de chocolate, boutique, fábrica, vecinos y un arcade con puertas mágicas.",
+    status: "available",
+    tag: "Mundo abierto",
+    noScore: true,
+  },
+  {
+    id: "recolecta",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Recolecta y Corre",
+    icon: "🏃",
+    tagline: "Corre por canchas 3D, salta vallas y junta golosinas contrarreloj.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "parkour",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Parkour Choco",
+    icon: "🧗",
+    tagline: "¡Mundo infinito con 10 ambientes, poderes y récord de metros! O la aventura de 7 etapas con una troll.",
+    status: "available",
+    tag: "Nuevo 3D",
+  },
+  {
+    id: "salto",
+    orient: "any", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Salto Choco",
+    icon: "🦘",
+    tagline: "Sube sin parar con tu Matichico en 3D, junta alfajores y vuela con el jetpack.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "autos",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Autos de Chocolate",
+    icon: "🏎️",
+    tagline: "Esquiva y acelera por la ruta de Matichoc, de día y de noche.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "tetris",
+    orient: "any", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Bloques de Productos",
+    icon: "🧱",
+    tagline: "Encaja cubos de chocolate en tu vitrina 3D antes de que se acumulen, o juega sin apuro en el tablero.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "memoria",
+    orient: "any", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Memoria Matichoc",
+    icon: "🧠",
+    tagline: "Encuentra las parejas de productos Matichoc con fotos reales.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "basquet_tiros",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Lanzamientos de Básquet",
+    icon: "🏀",
+    tagline: "Tiro libre en 3D: desliza el dedo hacia el aro y encesta antes de que acabe el tiempo.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "porristas",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Saltos de Porristas",
+    icon: "🤸",
+    tagline: "Rutina con tu equipo: toca al ritmo para lanzar, hacer figuras en el aire y armar la pirámide.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "futbol",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Fútbol Choco",
+    icon: "⚽",
+    tagline: "Penales, tiros libres con efecto y atajapenales: gana las 4 copas. 20 niveles en cada modo.",
+    status: "available",
+    tag: "Nuevo",
+  },
+  {
+    id: "dulces",
+    orient: "any", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Choco Match",
+    icon: "🍫",
+    tagline: "Junta 3 productos Matichoc iguales, haz combos y derrota a los jefes chocolateros. 20 niveles.",
+    status: "available",
+    tag: "Nuevo",
+  },
+  {
+    id: "ciudad",
+    orient: "landscape", // se maneja mejor con el celular acostado
+    name: "Ciudad Choco",
+    icon: "🏙️",
+    tagline: "Mundo abierto: maneja tu auto, pasea y ayuda a los vecinos con misiones tranquilas.",
+    status: "available",
+    tag: "Nuevo",
+  },
+  {
+    id: "merge",
+    orient: "any",
+    name: "Mati Merge",
+    icon: "🍬",
+    tagline: "Tablero lleno: junta alfajores, cuchuflís, bombones y tabletas del más chico al más grande, ¡hasta el Mati Dubai! Entrega pedidos y completa tu colección.",
+    status: "available",
+    tag: "Nuevo",
+  },
+  {
+    id: "aventura",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Aventura Choco",
+    icon: "🍄",
+    tagline: "Plataformas por 5 mundos: corre, salta, pisa malvaviscos y vence a los jefes. 20 niveles.",
+    status: "available",
+    tag: "Nuevo",
+  },
+  {
+    id: "fps3d",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Choco Blaster 3D",
+    icon: "🎯",
+    tagline: "Primera persona: baña de chocolate a los malvaviscos traviesos.",
+    status: "available",
+    appHidden: true,
+    tag: "3D",
+  },
+  {
+    id: "creador",
+    orient: "any", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Crea tu Chocolate",
+    icon: "🍫",
+    tagline: "Elige producto, sabor, toppings, envoltorio y etiqueta, y crea tu propio chocolate.",
+    status: "available",
+    tag: "3D",
+  },
+  {
+    id: "torre",
+    orient: "any", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Torre de Alfajores",
+    icon: "🥞",
+    tagline: "Suelta cada alfajor justo encima y arma la torre más alta de la playa. ¡Al centro es ¡Perfecto!",
+    status: "available",
+    tag: "Nuevo ☀️ Verano",
+  },
+  {
+    id: "avioneta",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Avioneta Choco",
+    icon: "✈️",
+    tagline: "Vuela sobre el mar de la playa: pasa por los aros dorados, junta alfajores y esquiva globos y gaviotas.",
+    status: "available",
+    tag: "Nuevo ☀️ Verano",
+  },
+  {
+    id: "lanchas",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Lanchas en el Lago",
+    icon: "🚤",
+    tagline: "Maneja tu lancha por el lago: esquiva boyas y rocas de chocolate, salta las olas y junta alfajores.",
+    status: "available",
+    tag: "Nuevo ☀️ Verano",
+  },
+  {
+    id: "minigolf",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Minigolf en la Playa",
+    icon: "⛳",
+    tagline: "9 hoyos en la playa con castillos de arena, palmeras y cangrejos. ¡Juega de a 2 por turnos en el mismo celular!",
+    status: "available",
+    tag: "Nuevo ☀️ Verano",
+  },
+  {
+    id: "billar",
+    orient: "landscape", // "landscape" = hay que jugarlo con el celular acostado; "any" = sirve en vertical y horizontal
+    name: "Billar de Bombones",
+    icon: "🎱",
+    tagline: "Golpea el bombón blanco y mete los 7 bombones en las cajas. ¡Juega de a 2 por turnos en el mismo celular!",
+    status: "available",
+    tag: "Nuevo ☀️ Verano",
+  },
+];
+
+export const GAMES_CATALOG = ALL_GAMES.filter((g) => !(IN_APP && g.appHidden));
